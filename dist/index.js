@@ -24,7 +24,9 @@ function fileGetContent(inFile, inRegRe) {
 
 function fileReplaceContent(inFile, inRegRe, inString) {
   var str = _fs2.default.readFileSync(inFile, CHARSET);
-  str = str.replace(inRegRe, inString);
+  str = str.replace(inRegRe, function (fullStr, match) {
+    return fullStr.replace(match, inString);
+  });
   _fs2.default.writeFileSync(inFile, str);
 }
 

@@ -10,7 +10,9 @@ function fileGetContent(inFile,inRegRe){
 
 function fileReplaceContent(inFile,inRegRe,inString){
   let str = fs.readFileSync(inFile,CHARSET);
-  str = str.replace(inRegRe,inString);
+  str = str.replace(inRegRe,(fullStr,match)=>{
+    return fullStr.replace(match,inString);
+  });
   fs.writeFileSync(inFile,str);
 }
 
